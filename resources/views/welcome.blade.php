@@ -38,7 +38,9 @@
     <body>
         <a href="{{ url('/home') }}">Home</a>
         <div class="container">
-        <h1>Hello {{ auth()->user()->name }}!</h1>
+        @if(!auth()->guest())
+            <h1>Hello {{ auth()->user()->name }}!</h1>
+        @endif
             <div class="content">
                 
                 <div class="title">Laravel 5</div>

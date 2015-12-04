@@ -37,7 +37,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        
+        return view('users.create');
     }
 
     /**
@@ -59,7 +59,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        var_dump($user);
+        return view('users.show')
+             ->with('user', $user);
     }
 
     /**
@@ -96,8 +99,6 @@ class UserController extends Controller
         
         $user = User::find($id);
         $user->delete();
-        
-        $request->session()->flash('message', 'Successfully deleted the user!');
         
           // get all the nerds
          $users = User::all();

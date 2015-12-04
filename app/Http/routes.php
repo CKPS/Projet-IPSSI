@@ -17,3 +17,9 @@ Route::get('/', function () {
 
 Route::resource('user', 'UserController');
 
+Route::get('user/{id}', 'UserController@show');
+
+Route::get('user/delete/{id}', 'UserController@destroy');
+
+Route::get('user/edit/{id}', 'UserController@edit');
+
