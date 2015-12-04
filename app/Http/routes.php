@@ -23,3 +23,7 @@ Route::get('user/delete/{id}', 'UserController@destroy');
 
 Route::get('user/edit/{id}', 'UserController@edit');
 
+Route::post('user/store', 'UserController@store');
+
+
+

@@ -22,12 +22,9 @@ class UserController extends Controller
         // get all the nerds
        $users = User::all();
        
-       
         // load the view and pass the users
         return view('users.index')
             ->with('users', $users);
-        
-        //return view('users.index');
     }
 
     /**
@@ -48,7 +45,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // store
+        $user = new User;
+        $user->name       = $request->input('name');
+        $user->email      = $request->input('email');
+        $user->password = $request->input('password');
+        $user->save();
+        
+        return redirect('user');
     }
 
     /**
@@ -60,7 +64,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        var_dump($user);
+
         return view('users.show')
              ->with('user', $user);
     }
@@ -100,10 +104,6 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         
-          // get all the nerds
-         $users = User::all();
-          // load the view and pass the users
-         return view('users.index')
-            ->with('users', $users);
+        return redirect('user');
     }
 }
