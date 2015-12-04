@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Config\Session;
+
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -16,7 +19,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        // get all the nerds
+       $users = User::all();
+       
+       
+        // load the view and pass the users
+        return view('users.index')
+            ->with('users', $users);
+        
+        //return view('users.index');
     }
 
     /**
@@ -80,8 +91,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        
+        $user = User::find($id);
+        $user->delete();
+        
+        $request->session()->flash('message', 'Successfully deleted the user!');
+        
+          // get all the nerds
+         $users = User::all();
+          // load the view and pass the users
+         return view('users.index')
+            ->with('users', $users);
     }
 }

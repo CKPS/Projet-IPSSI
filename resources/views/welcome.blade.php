@@ -36,8 +36,11 @@
         </style>
     </head>
     <body>
+        <a href="{{ url('/home') }}">Home</a>
         <div class="container">
+        <h1>Hello {{ auth()->user()->name }}!</h1>
             <div class="content">
+                
                 <div class="title">Laravel 5</div>
             </div>
         </div>
