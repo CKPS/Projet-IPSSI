@@ -75,9 +75,20 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+        $user = User::find($id);
+
+        if ($request->isMethod('post')) {
+            $user->name       = $request->input('name');
+            $user->email      = $request->input('email');
+            $user->password = $request->input('password');
+            $user->save();
+            //return redirect('user');
+        }
+
+        return view('users.edit')
+             ->with('user', $user);
     }
 
     /**
